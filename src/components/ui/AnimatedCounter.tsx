@@ -22,7 +22,6 @@ export default function AnimatedCounter({
 
   useEffect(() => {
     let active = true;
-    let observer: IntersectionObserver | undefined;
 
     const startAnimation = () => {
       if (hasAnimated.current) return;
@@ -40,12 +39,12 @@ export default function AnimatedCounter({
       });
     };
 
-    observer = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             startAnimation();
-            if (observer) observer.disconnect();
+            observer.disconnect();
           }
         });
       },
@@ -63,7 +62,7 @@ export default function AnimatedCounter({
     return () => {
       active = false;
       clearTimeout(fallbackTimer);
-      if (observer) observer.disconnect();
+      observer.disconnect();
     };
   }, [value, duration]);
 
