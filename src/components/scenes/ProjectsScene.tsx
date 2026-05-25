@@ -24,7 +24,7 @@ const projectsData: ProjectItem[] = [
     description:
       "A fast customer engagement application with dual-interface control loops, analytics dashboards, and custom reward triggers. Formulated for developer handoffs.",
     tags: ["Next.js", "Tailwind CSS", "TypeScript", "Node.js"],
-    gitLink: "https://github.com/Orionkaze/loyalty-pro",
+    gitLink: "https://github.com/Orionkaze/app",
   },
   {
     id: "mockmate",

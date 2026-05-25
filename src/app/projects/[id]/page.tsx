@@ -34,7 +34,7 @@ const projectDetailsData: Record<string, ProjectDetails> = {
       "Ultra-low latency data synchronization using edge routing"
     ],
     tags: ["Next.js", "Tailwind CSS", "TypeScript", "Node.js", "PostgreSQL"],
-    gitLink: "https://github.com/Orionkaze/loyalty-pro",
+    gitLink: "https://github.com/Orionkaze/app",
   },
   "mockmate": {
     id: "mockmate",
