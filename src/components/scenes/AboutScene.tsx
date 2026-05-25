@@ -85,7 +85,7 @@ export default function AboutScene() {
         <div className="flex flex-col justify-center">
           <h2
             ref={titleRef}
-            className="font-syne font-extrabold text-2xl md:text-4xl lg:text-5xl text-pure-white mb-6 uppercase tracking-wider leading-tight"
+            className="font-syne font-extrabold text-xl md:text-2xl lg:text-3xl text-pure-white mb-6 uppercase tracking-wider leading-tight"
             dangerouslySetInnerHTML={{
               __html: splitIntoWords("I build things that work. That scale. That matter."),
             }}

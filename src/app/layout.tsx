@@ -5,6 +5,7 @@ import Cursor from "@/components/ui/Cursor";
 import FilmGrain from "@/components/ui/FilmGrain";
 import Letterbox from "@/components/ui/Letterbox";
 import SceneNav from "@/components/ui/SceneNav";
+import SplashCursor from "@/components/ui/SplashCursor";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -45,6 +46,7 @@ export default function RootLayout({
       <body
         className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable} font-inter bg-black antialiased relative`}
       >
+        <SplashCursor />
         <FilmGrain />
         <Cursor />
         <Letterbox />

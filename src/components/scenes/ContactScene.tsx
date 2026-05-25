@@ -70,7 +70,7 @@ export default function ContactScene() {
         {/* Headline */}
         <h2
           ref={titleRef}
-          className="font-syne font-extrabold text-2xl md:text-4xl lg:text-5xl text-pure-white uppercase tracking-wider leading-tight mb-12 max-w-3xl"
+          className="font-syne font-extrabold text-xl md:text-2xl lg:text-3xl text-pure-white uppercase tracking-wider leading-tight mb-12 max-w-3xl"
           dangerouslySetInnerHTML={{
             __html: splitIntoWords("Let's build something the world hasn't seen yet."),
           }}
