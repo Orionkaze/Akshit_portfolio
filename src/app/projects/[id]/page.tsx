@@ -56,10 +56,10 @@ const projectDetailsData: Record<string, ProjectDetails> = {
   },
   "frontend-ai": {
     id: "frontend-ai",
-    name: "UI AI Generator",
+    name: "CodeForge AI",
     tagline: "Natural Language React Builder",
     description: "An automated component compiler translating plain English descriptions into styled React elements instantly.",
-    overview: "UI AI Generator is a next-generation component compiler that converts plain-text English descriptions into functional, beautifully styled React components. Running code compilation inside a secure, client-side WebAssembly sandbox utilizing ESBuild, it allows developers to experiment with layouts and view instant live rendering. It leverages state-of-the-art LLMs to translate human prompt descriptions into clean, production-ready TypeScript code.",
+    overview: "CodeForge AI is a next-generation component compiler that converts plain-text English descriptions into functional, beautifully styled React components. Running code compilation inside a secure, client-side WebAssembly sandbox utilizing ESBuild, it allows developers to experiment with layouts and view instant live rendering. It leverages state-of-the-art LLMs to translate human prompt descriptions into clean, production-ready TypeScript code.",
     challenge: "Directly rendering LLM-generated code poses severe security and performance issues. Running arbitrary script tags on the client could lead to cross-site scripting (XSS). Sandboxing the compile-and-render lifecycle fully inside WebAssembly without leaking host context was the primary technical obstacle.",
     solution: "We designed an isolated WebAssembly runner using a sandboxed iframe. Code bundles are compiled in memory using an inline ESBuild compiler, wrapping variables in scoped closures. We achieved safe, near-instant rendering in under 200ms, entirely on the client side.",
     features: [

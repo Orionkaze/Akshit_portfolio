@@ -39,7 +39,7 @@ const projectsData: ProjectItem[] = [
   },
   {
     id: "frontend-ai",
-    name: "UI AI Generator",
+    name: "CodeForge AI",
     tagline: "Natural Language React Builder",
     description:
       "An automated component compiler translating plain English descriptions into styled React elements instantly, complete with sandboxed code compilation.",
