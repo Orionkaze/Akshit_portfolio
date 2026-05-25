@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { animate } from "animejs";
 
 interface AnimatedCounterProps {
   value: number;
@@ -22,29 +21,38 @@ export default function AnimatedCounter({
 
   useEffect(() => {
     let active = true;
+    let observer: IntersectionObserver | undefined;
 
     const startAnimation = () => {
       if (hasAnimated.current) return;
       hasAnimated.current = true;
-      
-      const obj = { val: 0 };
-      animate(obj, {
-        val: value,
-        round: 1,
-        easing: "easeOutExpo",
-        duration: duration,
-        update: () => {
-          if (active) setCount(obj.val);
-        },
-      });
+
+      const startTime = performance.now();
+
+      const updateCount = (now: number) => {
+        if (!active) return;
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function: easeOutExpo
+        const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        
+        setCount(Math.round(ease * value));
+
+        if (progress < 1) {
+          requestAnimationFrame(updateCount);
+        }
+      };
+
+      requestAnimationFrame(updateCount);
     };
 
-    const observer = new IntersectionObserver(
+    observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             startAnimation();
-            observer.disconnect();
+            if (observer) observer.disconnect();
           }
         });
       },
@@ -62,7 +70,7 @@ export default function AnimatedCounter({
     return () => {
       active = false;
       clearTimeout(fallbackTimer);
-      observer.disconnect();
+      if (observer) observer.disconnect();
     };
   }, [value, duration]);
 
@@ -74,4 +82,3 @@ export default function AnimatedCounter({
     </span>
   );
 }
-
