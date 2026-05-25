@@ -32,8 +32,8 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Akshit Shukla | Cinematic Portfolio",
-  description: "A cinematic, immersive 3D personal portfolio of Akshit Shukla — Full-Stack Developer & CTO @ Arcavon.",
+  title: "Akshit | Cinematic Portfolio",
+  description: "A cinematic, immersive 3D personal portfolio of Akshit — Full-Stack Developer & CTO @ Arcavon.",
 };
 
 export default function RootLayout({

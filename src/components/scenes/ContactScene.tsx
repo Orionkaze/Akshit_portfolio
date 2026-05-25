@@ -111,7 +111,7 @@ export default function ContactScene() {
           Directed & Programmed by
         </span>
         <span className="font-inter text-[10px] text-pure-white uppercase tracking-[0.3em] font-light">
-          Akshit Shukla © 2026
+          Akshit © 2026
         </span>
         <span className="font-mono text-[8px] text-muted-silver/40 uppercase tracking-[0.15em] mt-1">
           All Systems Nominal.

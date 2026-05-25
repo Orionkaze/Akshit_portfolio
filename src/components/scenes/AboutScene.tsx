@@ -169,7 +169,7 @@ export default function AboutScene() {
                 System Operator
               </span>
               <h3 className="font-space text-3xl font-bold text-pure-white uppercase tracking-wider">
-                Akshit Shukla
+                Akshit
               </h3>
               <p className="font-inter text-sm text-muted-silver mt-2">
                 B.Tech CS (AI/ML)
