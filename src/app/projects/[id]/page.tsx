@@ -34,7 +34,7 @@ const projectDetailsData: Record<string, ProjectDetails> = {
       "Ultra-low latency data synchronization using edge routing"
     ],
     tags: ["Next.js", "Tailwind CSS", "TypeScript", "Node.js", "PostgreSQL"],
-    gitLink: "https://github.com/akshitshukla/loyalty-pro",
+    gitLink: "https://github.com/Orionkaze/loyalty-pro",
   },
   "mockmate": {
     id: "mockmate",
@@ -52,7 +52,7 @@ const projectDetailsData: Record<string, ProjectDetails> = {
     ],
     tags: ["Next.js", "OpenAI", "WebRTC", "FastAPI", "Tailwind CSS", "LangChain"],
     liveLink: "https://mock-mate-rosy.vercel.app/",
-    gitLink: "https://github.com/akshitshukla/mockmate",
+    gitLink: "https://github.com/Orionkaze/MockMate",
   },
   "frontend-ai": {
     id: "frontend-ai",
@@ -70,7 +70,7 @@ const projectDetailsData: Record<string, ProjectDetails> = {
     ],
     tags: ["React.js", "LLM APIs", "ESBuild", "TypeScript", "Tailwind CSS"],
     liveLink: "https://codeforgeai-eta.vercel.app",
-    gitLink: "https://github.com/akshitshukla/ui-ai-generator",
+    gitLink: "https://github.com/amankumarjha006/frontend_ui_ai",
   },
 };
 

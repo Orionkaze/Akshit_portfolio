@@ -24,7 +24,7 @@ const projectsData: ProjectItem[] = [
     description:
       "A fast customer engagement application with dual-interface control loops, analytics dashboards, and custom reward triggers. Formulated for developer handoffs.",
     tags: ["Next.js", "Tailwind CSS", "TypeScript", "Node.js"],
-    gitLink: "https://github.com/akshitshukla/loyalty-pro",
+    gitLink: "https://github.com/Orionkaze/loyalty-pro",
   },
   {
     id: "mockmate",
@@ -35,7 +35,7 @@ const projectsData: ProjectItem[] = [
     tags: ["Next.js", "OpenAI", "WebRTC", "FastAPI", "Tailwind CSS"],
     isHero: true,
     liveLink: "https://mock-mate-rosy.vercel.app/",
-    gitLink: "https://github.com/akshitshukla/mockmate",
+    gitLink: "https://github.com/Orionkaze/MockMate",
   },
   {
     id: "frontend-ai",
@@ -45,7 +45,7 @@ const projectsData: ProjectItem[] = [
       "An automated component compiler translating plain English descriptions into styled React elements instantly, complete with sandboxed code compilation.",
     tags: ["React.js", "LLM APIs", "ESBuild", "TypeScript"],
     liveLink: "https://codeforgeai-eta.vercel.app",
-    gitLink: "https://github.com/akshitshukla/ui-ai-generator",
+    gitLink: "https://github.com/amankumarjha006/frontend_ui_ai",
   },
 ];
 

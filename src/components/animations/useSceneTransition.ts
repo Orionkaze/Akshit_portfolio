@@ -165,17 +165,24 @@ export function useSceneTransition(
           return;
         }
 
+        let ticking = false;
         const onScrollThreshold = () => {
-          if (window.scrollY >= self.end + threshold) {
-            window.removeEventListener("scroll", onScrollThreshold);
-            delete thresholdListeners[id];
-            if (!win.isTransitioning) {
-              performTransition(type, target, false);
-            }
-          } else if (window.scrollY < self.end - 50) {
-            // Cancel trigger if the user scrolls back up
-            window.removeEventListener("scroll", onScrollThreshold);
-            delete thresholdListeners[id];
+          if (!ticking) {
+            window.requestAnimationFrame(() => {
+              if (window.scrollY >= self.end + threshold) {
+                window.removeEventListener("scroll", onScrollThreshold);
+                delete thresholdListeners[id];
+                if (!win.isTransitioning) {
+                  performTransition(type, target, false);
+                }
+              } else if (window.scrollY < self.end - 50) {
+                // Cancel trigger if the user scrolls back up
+                window.removeEventListener("scroll", onScrollThreshold);
+                delete thresholdListeners[id];
+              }
+              ticking = false;
+            });
+            ticking = true;
           }
         };
 

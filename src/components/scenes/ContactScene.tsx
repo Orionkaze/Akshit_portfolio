@@ -9,7 +9,7 @@ const contactLinks = [
   { label: "Email", value: "akshit2046@gmail.com", href: "mailto:akshit2046@gmail.com" },
   { label: "LinkedIn", value: "akshit-shukla-529707324", href: "https://linkedin.com/in/akshit-shukla-529707324" },
   { label: "Website", value: "www.arcavon.in", href: "https://www.arcavon.in" },
-  { label: "GitHub", value: "github.com/akshitshukla", href: "https://github.com" },
+  { label: "GitHub", value: "github.com/Orionkaze", href: "https://github.com/Orionkaze" },
 ];
 
 export default function ContactScene() {
