@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { useWindowSize } from "@/components/animations/useWindowSize";
 import MagneticButton from "@/components/ui/MagneticButton";
 
@@ -11,15 +11,11 @@ const HeroCanvas = dynamic(() => import("@/components/three/HeroCanvas"), {
   ssr: false,
 });
 
-const roles = [
-  "Full-Stack Developer",
-  "CTO @ Arcavon",
-  "AI/ML Student",
-];
+const roles = ["Full-Stack Developer", "CTO @ Arcavon", "AI/ML Student"];
 
 const nameLetters = "AKSHIT".split("");
 
-const letterVariants = {
+const letterVariants: Variants = {
   hidden: { opacity: 0, y: 20, scale: 0.5 },
   visible: (i: number) => ({
     opacity: 1,
@@ -128,9 +124,7 @@ export default function HeroScene() {
         </div>
 
         {/* Magnetic CTA button */}
-        <MagneticButton onClick={handleEnterClick}>
-          See My Work
-        </MagneticButton>
+        <MagneticButton onClick={handleEnterClick}>See My Work</MagneticButton>
       </div>
 
       {/* Scroll indicator */}
@@ -145,4 +139,3 @@ export default function HeroScene() {
     </div>
   );
 }
-
