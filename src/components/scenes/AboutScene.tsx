@@ -70,8 +70,7 @@ export default function AboutScene() {
       observer.disconnect();
       setHasTriggeredText(false);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [animateWords]);
 
   return (
     <div

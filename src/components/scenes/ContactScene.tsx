@@ -48,8 +48,7 @@ export default function ContactScene() {
       observer.disconnect();
       setHasAnimated(false);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [animateWords]);
 
   return (
     <div

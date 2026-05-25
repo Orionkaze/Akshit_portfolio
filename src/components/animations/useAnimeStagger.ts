@@ -1,10 +1,11 @@
 "use client";
 
+import { useCallback } from "react";
 import { animate, stagger } from "animejs";
 
 export function useAnimeStagger() {
   // Helper to split text into letter spans
-  const splitIntoLetters = (text: string): string => {
+  const splitIntoLetters = useCallback((text: string): string => {
     return text
       .split("")
       .map((char) => {
@@ -12,19 +13,19 @@ export function useAnimeStagger() {
         return `<span class="inline-block opacity-0 stagger-letter" style="transform-origin: center;">${char}</span>`;
       })
       .join("");
-  };
+  }, []);
 
   // Helper to split text into word spans
-  const splitIntoWords = (text: string): string => {
+  const splitIntoWords = useCallback((text: string): string => {
     return text
       .split(" ")
       .map((word) => {
         return `<span class="inline-block overflow-hidden mr-[0.25em]"><span class="inline-block opacity-0 translate-y-6 stagger-word">${word}</span></span>`;
       })
       .join("");
-  };
+  }, []);
 
-  const animateLetters = (containerEl: HTMLElement | null, delay = 0) => {
+  const animateLetters = useCallback((containerEl: HTMLElement | null, delay = 0) => {
     if (!containerEl) return;
     const targets = containerEl.querySelectorAll(".stagger-letter");
     if (targets.length === 0) return;
@@ -37,9 +38,9 @@ export function useAnimeStagger() {
       delay: stagger(80, { start: delay }),
       easing: "easeOutElastic(1, .8)",
     });
-  };
+  }, []);
 
-  const animateWords = (containerEl: HTMLElement | null, delay = 0) => {
+  const animateWords = useCallback((containerEl: HTMLElement | null, delay = 0) => {
     if (!containerEl) return;
     const targets = containerEl.querySelectorAll(".stagger-word");
     if (targets.length === 0) return;
@@ -51,7 +52,7 @@ export function useAnimeStagger() {
       delay: stagger(35, { start: delay }),
       easing: "easeOutCubic",
     });
-  };
+  }, []);
 
   return {
     splitIntoLetters,
@@ -60,4 +61,3 @@ export function useAnimeStagger() {
     animateWords,
   };
 }
-

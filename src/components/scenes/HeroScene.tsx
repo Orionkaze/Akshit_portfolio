@@ -47,8 +47,7 @@ export default function HeroScene() {
     }, 3000);
 
     return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [animateLetters]);
 
   const handleEnterClick = () => {
     interface CustomWindow extends Window {
