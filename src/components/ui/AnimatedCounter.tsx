@@ -21,34 +21,49 @@ export default function AnimatedCounter({
   const hasAnimated = useRef(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    let active = true;
+    let observer: IntersectionObserver | undefined;
+
+    const startAnimation = () => {
+      if (hasAnimated.current) return;
+      hasAnimated.current = true;
+      
+      const obj = { val: 0 };
+      animate(obj, {
+        val: value,
+        round: 1,
+        easing: "easeOutExpo",
+        duration: duration,
+        update: () => {
+          if (active) setCount(obj.val);
+        },
+      });
+    };
+
+    observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimated.current) {
-            hasAnimated.current = true;
-            
-            const obj = { val: 0 };
-            animate(obj, {
-              val: value,
-              round: 1,
-              easing: "easeOutExpo",
-              duration: duration,
-              update: () => {
-                setCount(obj.val);
-              },
-            });
+          if (entry.isIntersecting) {
+            startAnimation();
+            if (observer) observer.disconnect();
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
 
     if (containerRef.current) {
       observer.observe(containerRef.current);
     }
 
+    const fallbackTimer = setTimeout(() => {
+      startAnimation();
+    }, 500);
+
     return () => {
-      observer.disconnect();
+      active = false;
+      clearTimeout(fallbackTimer);
+      if (observer) observer.disconnect();
     };
   }, [value, duration]);
 
