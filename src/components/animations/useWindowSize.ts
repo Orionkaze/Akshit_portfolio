@@ -9,6 +9,7 @@ export function useWindowSize() {
     isMobile: false,
     isTablet: false,
     isDesktop: true,
+    hasMeasured: false,
   });
 
   useEffect(() => {
@@ -19,6 +20,7 @@ export function useWindowSize() {
         isMobile: w < 768,
         isTablet: w >= 768 && w <= 1024,
         isDesktop: w > 1024,
+        hasMeasured: true,
       });
     };
     

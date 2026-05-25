@@ -50,9 +50,9 @@ export default function ContactScene() {
   };
 
   return (
-    <section
+    <div
       ref={containerRef}
-      id="scene-6"
+      id="scene-5"
       className="w-screen h-screen relative flex flex-col justify-between items-center overflow-hidden bg-black py-20 px-6 select-none"
     >
       {/* Background radial gradient */}
@@ -70,7 +70,7 @@ export default function ContactScene() {
         {/* Headline */}
         <h2
           ref={titleRef}
-          className="font-syne font-extrabold text-3xl md:text-5xl lg:text-7xl text-pure-white uppercase tracking-wider leading-tight mb-12 max-w-3xl"
+          className="font-syne font-extrabold text-2xl md:text-4xl lg:text-5xl text-pure-white uppercase tracking-wider leading-tight mb-12 max-w-3xl"
           dangerouslySetInnerHTML={{
             __html: splitIntoWords("Let's build something the world hasn't seen yet."),
           }}
@@ -118,6 +118,6 @@ export default function ContactScene() {
           All Systems Nominal.
         </span>
       </div>
-    </section>
+    </div>
   );
 }

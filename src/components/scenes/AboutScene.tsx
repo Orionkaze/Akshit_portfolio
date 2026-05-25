@@ -71,9 +71,9 @@ export default function AboutScene() {
   }, [hasTriggeredText, animateWords]);
 
   return (
-    <section
+    <div
       ref={containerRef}
-      id="scene-2"
+      id="scene-1"
       className="w-screen min-h-screen relative flex items-center justify-center overflow-hidden bg-radial-gradient py-20 px-6 md:px-12 lg:px-24 select-none"
     >
       {/* Background Layer (Parallax Fog Depth) */}
@@ -85,7 +85,7 @@ export default function AboutScene() {
         <div className="flex flex-col justify-center">
           <h2
             ref={titleRef}
-            className="font-syne font-extrabold text-4xl md:text-5xl lg:text-7xl text-pure-white mb-6 uppercase tracking-wider leading-tight"
+            className="font-syne font-extrabold text-2xl md:text-4xl lg:text-5xl text-pure-white mb-6 uppercase tracking-wider leading-tight"
             dangerouslySetInnerHTML={{
               __html: splitIntoWords("I build things that work. That scale. That matter."),
             }}
@@ -200,6 +200,6 @@ export default function AboutScene() {
           </motion.div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

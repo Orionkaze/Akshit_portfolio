@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAnimeStagger } from "@/components/animations/useAnimeStagger";
+import { useWindowSize } from "@/components/animations/useWindowSize";
 import MagneticButton from "@/components/ui/MagneticButton";
 
 // Dynamic import of the 3D canvas with SSR disabled to prevent hydration errors
@@ -18,9 +19,15 @@ const roles = [
 ];
 
 export default function HeroScene() {
+  const { isMobile, hasMeasured } = useWindowSize();
+  const [mounted, setMounted] = useState(false);
   const nameRef = useRef<HTMLHeadingElement>(null);
   const { splitIntoLetters, animateLetters } = useAnimeStagger();
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     // Verify Syne font variable is loaded
@@ -50,17 +57,23 @@ export default function HeroScene() {
     if (typeof window !== "undefined" && win.navigateToScene) {
       win.navigateToScene(1);
     } else {
-      document.getElementById("scene-2")?.scrollIntoView();
+      document.getElementById("scene-1")?.scrollIntoView();
     }
   };
 
   return (
-    <section
-      id="scene-1"
+    <div
+      id="scene-0"
       className="w-screen h-screen relative flex items-center justify-center overflow-hidden bg-black select-none"
     >
       {/* 3D Particle Backdrop */}
-      <HeroCanvas />
+      {!mounted || !hasMeasured ? (
+        <div className="w-full h-full absolute inset-0 -z-10 bg-radial-gradient" />
+      ) : isMobile ? (
+        <div className="w-full h-full absolute inset-0 -z-10 bg-radial-gradient" />
+      ) : (
+        <HeroCanvas />
+      )}
 
       {/* Hero Content */}
       <div className="z-10 text-center max-w-4xl px-6 flex flex-col items-center justify-center">
@@ -115,6 +128,6 @@ export default function HeroScene() {
           className="w-1 h-3 bg-electric-cyan rounded-full"
         />
       </div>
-    </section>
+    </div>
   );
 }

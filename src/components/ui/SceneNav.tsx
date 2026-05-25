@@ -5,17 +5,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useWindowSize } from "@/components/animations/useWindowSize";
 
 const scenes = [
-  { id: "scene-1", label: "Opening" },
-  { id: "scene-2", label: "Story" },
-  { id: "scene-3", label: "Journey" },
-  { id: "scene-4", label: "Work" },
-  { id: "scene-5", label: "Arsenal" },
-  { id: "scene-6", label: "Call" },
+  { id: "scene-0", label: "Opening" },
+  { id: "scene-1", label: "Story" },
+  { id: "scene-2", label: "Journey" },
+  { id: "scene-3", label: "Work" },
+  { id: "scene-4", label: "Arsenal" },
+  { id: "scene-5", label: "Call" },
 ];
 
 export default function SceneNav() {
-  const { isMobile, isTablet } = useWindowSize();
-  const [activeScene, setActiveScene] = useState("scene-1");
+  const { isMobile, isTablet, hasMeasured } = useWindowSize();
+  const [activeScene, setActiveScene] = useState("scene-0");
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
@@ -73,6 +73,14 @@ export default function SceneNav() {
       }
     }
   };
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !hasMeasured) return null;
 
   return (
     <>

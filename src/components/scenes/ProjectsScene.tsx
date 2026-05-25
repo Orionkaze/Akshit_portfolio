@@ -174,9 +174,9 @@ export default function ProjectsScene() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section
+    <div
       ref={containerRef}
-      id="scene-4"
+      id="scene-3"
       className="w-screen min-h-screen relative flex flex-col justify-center items-center overflow-hidden bg-radial-gradient py-24 px-6 select-none"
     >
       {/* Dynamic Grid Background Layer */}
@@ -209,6 +209,6 @@ export default function ProjectsScene() {
           <ProjectCard project={projectsData[2]} />
         </div>
       </div>
-    </section>
+    </div>
   );
 }

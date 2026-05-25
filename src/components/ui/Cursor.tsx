@@ -5,11 +5,10 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useWindowSize } from "@/components/animations/useWindowSize";
 
 export default function Cursor() {
-  const { isMobile } = useWindowSize();
+  const { isMobile, hasMeasured } = useWindowSize();
   const [hovered, setHovered] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-
   // Motion values for instant tracking (inner dot)
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
@@ -18,6 +17,12 @@ export default function Cursor() {
   const springConfig = { damping: 30, stiffness: 250, mass: 0.5 };
   const trailX = useSpring(mouseX, springConfig);
   const trailY = useSpring(mouseY, springConfig);
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isMobile) return;
@@ -82,7 +87,7 @@ export default function Cursor() {
     };
   }, [mouseX, mouseY, isVisible, isMobile]);
 
-  if (isMobile || !isVisible) return null;
+  if (!mounted || !hasMeasured || isMobile || !isVisible) return null;
 
   return (
     <>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useMemo } from "react";
+import React, { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -84,9 +84,14 @@ function Particles({ count = 250 }: { count?: number }) {
 }
 
 export default function HeroCanvas() {
-  const { isMobile, isTablet } = useWindowSize();
+  const { isMobile, isTablet, hasMeasured } = useWindowSize();
+  const [mounted, setMounted] = useState(false);
 
-  if (isMobile) {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !hasMeasured || isMobile) {
     return <div className="w-full h-full absolute inset-0 -z-10 bg-radial-gradient" />;
   }
 

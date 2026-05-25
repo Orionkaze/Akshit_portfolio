@@ -1,31 +1,22 @@
 "use client";
 
-import React, { useRef } from "react";
-import dynamic from "next/dynamic";
+import React, { useRef, useState, useEffect } from "react";
 import { useSceneTransition } from "@/components/animations/useSceneTransition";
 
-// Dynamically import all scene components to avoid hydration errors
-const HeroScene = dynamic(() => import("@/components/scenes/HeroScene"), {
-  ssr: false,
-});
-const AboutScene = dynamic(() => import("@/components/scenes/AboutScene"), {
-  ssr: false,
-});
-const ExperienceScene = dynamic(() => import("@/components/scenes/ExperienceScene"), {
-  ssr: false,
-});
-const ProjectsScene = dynamic(() => import("@/components/scenes/ProjectsScene"), {
-  ssr: false,
-});
-const SkillsScene = dynamic(() => import("@/components/scenes/SkillsScene"), {
-  ssr: false,
-});
-const ContactScene = dynamic(() => import("@/components/scenes/ContactScene"), {
-  ssr: false,
-});
+import HeroScene from "@/components/scenes/HeroScene";
+import AboutScene from "@/components/scenes/AboutScene";
+import ExperienceScene from "@/components/scenes/ExperienceScene";
+import ProjectsScene from "@/components/scenes/ProjectsScene";
+import SkillsScene from "@/components/scenes/SkillsScene";
+import ContactScene from "@/components/scenes/ContactScene";
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Transition overlay element references
   const blackFadeRef = useRef<HTMLDivElement>(null);
@@ -72,12 +63,25 @@ export default function Home() {
       />
 
       {/* Cinematic Scenes */}
-      <HeroScene />
-      <AboutScene />
-      <ExperienceScene />
-      <ProjectsScene />
-      <SkillsScene />
-      <ContactScene />
+      {mounted ? (
+        <>
+          <HeroScene />
+          <AboutScene />
+          <ExperienceScene />
+          <ProjectsScene />
+          <SkillsScene />
+          <ContactScene />
+        </>
+      ) : (
+        <>
+          <div id="scene-0" className="w-screen h-screen bg-black" />
+          <div id="scene-1" className="w-screen h-screen bg-black" />
+          <div id="scene-2" className="w-screen h-screen bg-black" />
+          <div id="scene-3" className="w-screen h-screen bg-black" />
+          <div id="scene-4" className="w-screen h-screen bg-black" />
+          <div id="scene-5" className="w-screen h-screen bg-black" />
+        </>
+      )}
     </div>
   );
 }

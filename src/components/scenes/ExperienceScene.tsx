@@ -111,9 +111,9 @@ export default function ExperienceScene() {
   }, [isMobile]);
 
   return (
-    <section
+    <div
       ref={containerRef}
-      id="scene-3"
+      id="scene-2"
       className="w-screen min-h-screen relative overflow-hidden bg-black py-24 px-6 md:px-12 lg:px-24 select-none"
     >
       {/* Cinematic grid pattern overlay */}
@@ -216,6 +216,6 @@ export default function ExperienceScene() {
 
         </div>
       </div>
-    </section>
+    </div>
   );
 }

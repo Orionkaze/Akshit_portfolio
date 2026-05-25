@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { useWindowSize } from "@/components/animations/useWindowSize";
 import { skillsList } from "@/components/three/SkillsSphere";
@@ -11,11 +11,16 @@ const SkillsSphere = dynamic(() => import("@/components/three/SkillsSphere"), {
 });
 
 export default function SkillsScene() {
-  const { isMobile } = useWindowSize();
+  const { isMobile, hasMeasured } = useWindowSize();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
-    <section
-      id="scene-5"
+    <div
+      id="scene-4"
       className="w-screen min-h-screen relative flex flex-col justify-center items-center overflow-hidden bg-black py-20 px-6 select-none"
     >
       {/* Slow Shifting Nebula Background Layer */}
@@ -36,7 +41,9 @@ export default function SkillsScene() {
 
       {/* Skills Container */}
       <div className="w-full max-w-4xl min-h-[350px] md:h-[550px] relative z-10 flex items-center justify-center mt-6">
-        {isMobile ? (
+        {!mounted || !hasMeasured ? (
+          <div className="w-full h-full flex items-center justify-center bg-transparent" />
+        ) : isMobile ? (
           <div className="w-full max-w-[340px] xs:max-w-[400px] sm:max-w-[540px] grid grid-cols-3 sm:grid-cols-4 gap-3 px-4 py-8">
             {skillsList.map((skill) => (
               <div
@@ -80,6 +87,6 @@ export default function SkillsScene() {
           <span>Backend / Ops</span>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

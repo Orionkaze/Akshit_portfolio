@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useMemo } from "react";
+import React, { useRef, useState, useMemo, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Html } from "@react-three/drei";
 import * as THREE from "three";
@@ -141,9 +141,14 @@ function CentralSphere() {
 }
 
 export default function SkillsSphere() {
-  const { isMobile } = useWindowSize();
+  const { isMobile, hasMeasured } = useWindowSize();
+  const [mounted, setMounted] = useState(false);
 
-  if (isMobile) {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !hasMeasured || isMobile) {
     return null;
   }
 
