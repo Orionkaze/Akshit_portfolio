@@ -92,7 +92,7 @@ export default function ExperienceScene() {
               <CardSwap
                 cardDistance={50}
                 verticalDistance={60}
-                delay={4000}
+                delay={2500}
                 pauseOnHover={true}
                 easing="elastic"
                 width={420}
@@ -102,7 +102,7 @@ export default function ExperienceScene() {
                   <p className="font-mono text-xs text-electric-cyan tracking-[0.2em] uppercase mb-2">
                     2025 – PRESENT
                   </p>
-                  <h3 className="font-syne font-extrabold text-2xl text-pure-white uppercase whitespace-nowrap mb-1">
+                  <h3 className="font-syne font-extrabold text-2xl text-pure-white uppercase mb-1">
                     CTO & Full-Stack Dev
                   </h3>
                   <p className="font-mono text-sm text-electric-cyan mb-4">@Arcavon</p>
@@ -126,7 +126,7 @@ export default function ExperienceScene() {
                   <p className="font-mono text-xs text-electric-cyan tracking-[0.2em] uppercase mb-2">
                     2025
                   </p>
-                  <h3 className="font-syne font-extrabold text-2xl text-pure-white uppercase whitespace-nowrap mb-1">
+                  <h3 className="font-syne font-extrabold text-2xl text-pure-white uppercase mb-1">
                     Google Student Ambassador
                   </h3>
                   <p className="font-mono text-sm text-electric-cyan mb-4">@SDGI</p>
@@ -146,7 +146,7 @@ export default function ExperienceScene() {
                   <p className="font-mono text-xs text-electric-cyan tracking-[0.2em] uppercase mb-2">
                     2026 – PRESENT
                   </p>
-                  <h3 className="font-syne font-extrabold text-2xl text-pure-white uppercase whitespace-nowrap mb-1">
+                  <h3 className="font-syne font-extrabold text-2xl text-pure-white uppercase mb-1">
                     GFG Campus Mantri
                   </h3>
                   <p className="font-mono text-sm text-electric-cyan mb-4">@SDGI Global University</p>
