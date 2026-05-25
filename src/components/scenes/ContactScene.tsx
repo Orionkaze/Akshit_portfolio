@@ -17,13 +17,13 @@ export default function ContactScene() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
   const { splitIntoWords, animateWords } = useAnimeStagger();
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const [, setHasAnimated] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasAnimated) {
+          if (entry.isIntersecting) {
             setHasAnimated(true);
             setTimeout(() => {
               if (titleRef.current) animateWords(titleRef.current, 0);
@@ -33,6 +33,7 @@ export default function ContactScene() {
                 linksRef.current.classList.add("opacity-100", "translate-y-0");
               }
             }, 300);
+            observer.disconnect();
           }
         });
       },
@@ -43,8 +44,12 @@ export default function ContactScene() {
       observer.observe(containerRef.current);
     }
 
-    return () => observer.disconnect();
-  }, [hasAnimated, animateWords]);
+    return () => {
+      observer.disconnect();
+      setHasAnimated(false);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div
@@ -97,7 +102,7 @@ export default function ContactScene() {
         </div>
 
         {/* CTA Button */}
-        <Link href="/contact" className="relative z-50 pointer-events-auto">
+        <Link href="/contact" className="relative z-50 pointer-events-auto mb-10 md:mb-16">
           <MagneticButton onClick={() => {}}>
             Let&apos;s Connect
           </MagneticButton>
@@ -106,15 +111,12 @@ export default function ContactScene() {
 
 
       {/* Movie Ending Style Credits */}
-      <div className="flex flex-col items-center text-center gap-1.5 pointer-events-none">
-        <span className="font-mono text-[9px] text-muted-silver/60 uppercase tracking-[0.25em]">
-          Directed & Programmed by
-        </span>
-        <span className="font-inter text-[10px] text-pure-white uppercase tracking-[0.3em] font-light">
-          Akshit © 2026
-        </span>
-        <span className="font-mono text-[8px] text-muted-silver/40 uppercase tracking-[0.15em] mt-1">
-          All Systems Nominal.
+      <div className="flex flex-col items-center text-center gap-2 max-w-xl pointer-events-auto">
+        <p className="font-mono text-[10px] text-muted-silver/50 uppercase tracking-widest leading-relaxed">
+          Designed in chaos. Built between lectures. Debugged at 3am with Red Bull and zero regrets. Cried over by others. Shipped anyway.
+        </p>
+        <span className="font-inter text-xs text-pure-white tracking-wider font-light mt-1">
+          Cooked and served by <span className="text-electric-cyan font-semibold">Akshit</span> — hope it hurt a little. 😘💅✨
         </span>
       </div>
     </div>

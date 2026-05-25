@@ -48,13 +48,14 @@ export default function AboutScene() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasTriggeredText) {
+          if (entry.isIntersecting) {
             setHasTriggeredText(true);
             // Run stagger animation
             setTimeout(() => {
               if (titleRef.current) animateWords(titleRef.current, 0);
               if (bioRef.current) animateWords(bioRef.current, 300);
             }, 300);
+            observer.disconnect();
           }
         });
       },
@@ -67,8 +68,10 @@ export default function AboutScene() {
 
     return () => {
       observer.disconnect();
+      setHasTriggeredText(false);
     };
-  }, [hasTriggeredText, animateWords]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div
@@ -182,12 +185,20 @@ export default function AboutScene() {
                 <span className="text-xs text-pure-white font-mono uppercase">CTO & Full-Stack</span>
               </div>
               <div className="flex justify-between border-b border-white/5 pb-2">
+                <span className="text-xs text-muted-silver font-mono uppercase">Specialty</span>
+                <span className="text-xs text-pure-white font-mono uppercase">System Architecture</span>
+              </div>
+              <div className="flex justify-between border-b border-white/5 pb-2">
+                <span className="text-xs text-muted-silver font-mono uppercase">Core Stack</span>
+                <span className="text-xs text-pure-white font-mono uppercase text-right">Go • TS • Next.js • Py</span>
+              </div>
+              <div className="flex justify-between border-b border-white/5 pb-2">
                 <span className="text-xs text-muted-silver font-mono uppercase">Location</span>
                 <span className="text-xs text-pure-white font-mono uppercase">UP, India</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-xs text-muted-silver font-mono uppercase">Status</span>
-                <span className="text-xs text-electric-cyan font-mono uppercase animate-pulse">ACTIVE_NODE</span>
+                <span className="text-xs text-electric-cyan font-mono uppercase animate-pulse text-right">ACTIVE_NODE</span>
               </div>
             </div>
 
