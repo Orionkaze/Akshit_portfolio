@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useWindowSize } from "@/components/animations/useWindowSize";
+import Link from "next/link";
 
 interface ProjectItem {
   id: string;
@@ -11,6 +12,8 @@ interface ProjectItem {
   description: string;
   tags: string[];
   isHero?: boolean;
+  liveLink?: string;
+  gitLink?: string;
 }
 
 const projectsData: ProjectItem[] = [
@@ -21,6 +24,7 @@ const projectsData: ProjectItem[] = [
     description:
       "A fast customer engagement application with dual-interface control loops, analytics dashboards, and custom reward triggers. Formulated for developer handoffs.",
     tags: ["Next.js", "Tailwind CSS", "TypeScript", "Node.js"],
+    gitLink: "https://github.com/akshitshukla/loyalty-pro",
   },
   {
     id: "mockmate",
@@ -30,6 +34,8 @@ const projectsData: ProjectItem[] = [
       "A cinematic, full-scope AI interviewing node with live speech-to-text, real-time audio/video feedback, resume parsing, automatic scoring, and custom roadmap curation.",
     tags: ["Next.js", "OpenAI", "WebRTC", "FastAPI", "Tailwind CSS"],
     isHero: true,
+    liveLink: "https://mock-mate-rosy.vercel.app/",
+    gitLink: "https://github.com/akshitshukla/mockmate",
   },
   {
     id: "frontend-ai",
@@ -38,6 +44,8 @@ const projectsData: ProjectItem[] = [
     description:
       "An automated component compiler translating plain English descriptions into styled React elements instantly, complete with sandboxed code compilation.",
     tags: ["React.js", "LLM APIs", "ESBuild", "TypeScript"],
+    liveLink: "https://codeforgeai-eta.vercel.app",
+    gitLink: "https://github.com/akshitshukla/ui-ai-generator",
   },
 ];
 
@@ -152,18 +160,67 @@ function ProjectCard({ project }: { project: ProjectItem }) {
           ))}
         </div>
 
-        {/* Link Arrow */}
-        <div className="flex items-center gap-2 text-pure-white font-space text-xs tracking-widest uppercase mt-2 group-hover:text-electric-cyan transition-colors duration-300">
-          <span>Inspect Node</span>
-          <svg
-            className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform duration-300"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
+        {/* Link Arrow Actions */}
+        <div className="flex flex-col gap-2.5 mt-2 relative z-50">
+          {project.liveLink ? (
+            <div className="flex items-center justify-between w-full">
+              {/* Primary action: Live link */}
+              <a
+                href={project.liveLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="flex items-center gap-1.5 text-pure-white font-space text-[10px] md:text-xs tracking-widest uppercase hover:text-electric-cyan transition-colors duration-300 pointer-events-auto cursor-pointer"
+              >
+                <span>Launch Live</span>
+                <svg
+                  className="w-3.5 h-3.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+
+              {/* Secondary action: Details page */}
+              <Link
+                href={`/projects/${project.id}`}
+                onClick={(e) => e.stopPropagation()}
+                className="flex items-center gap-1 text-muted-silver font-space text-[10px] md:text-xs tracking-widest uppercase hover:text-electric-cyan transition-colors duration-300 pointer-events-auto cursor-pointer"
+              >
+                <span>Case Study</span>
+                <svg
+                  className="w-3.5 h-3.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          ) : (
+            /* No live link: details page is primary */
+            <Link
+              href={`/projects/${project.id}`}
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center gap-2 text-pure-white font-space text-[10px] md:text-xs tracking-widest uppercase hover:text-electric-cyan transition-colors duration-300 pointer-events-auto cursor-pointer"
+            >
+              <span>Inspect Node</span>
+              <svg
+                className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </Link>
+          )}
         </div>
       </div>
     </motion.div>

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useWindowSize } from "@/components/animations/useWindowSize";
+import { usePathname } from "next/navigation";
 
 const scenes = [
   { id: "scene-0", label: "Opening" },
@@ -15,34 +16,23 @@ const scenes = [
 
 export default function SceneNav() {
   const { isMobile, isTablet, hasMeasured } = useWindowSize();
+  const pathname = usePathname();
   const [activeScene, setActiveScene] = useState("scene-0");
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: "-50% 0px -50% 0px", // Trigger when scene occupies the center of the viewport
-      threshold: 0,
+    const handleSceneChange = (e: Event) => {
+      const customEvent = e as CustomEvent<{ activeScene: string }>;
+      if (customEvent.detail && customEvent.detail.activeScene) {
+        setActiveScene(customEvent.detail.activeScene);
+      }
     };
 
-    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveScene(entry.target.id);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(handleIntersection, observerOptions);
-
-    scenes.forEach((scene) => {
-      const el = document.getElementById(scene.id);
-      if (el) observer.observe(el);
-    });
+    window.addEventListener("sceneChange", handleSceneChange);
 
     return () => {
-      observer.disconnect();
+      window.removeEventListener("sceneChange", handleSceneChange);
     };
   }, []);
 
@@ -64,7 +54,7 @@ export default function SceneNav() {
       navigateToScene?: (index: number) => void;
     }
     const win = window as unknown as CustomWindow;
-    if (typeof window !== "undefined" && win.navigateToScene) {
+    if (win && win.navigateToScene) {
       win.navigateToScene(index);
     } else {
       const target = document.getElementById(scenes[index].id);
@@ -80,7 +70,7 @@ export default function SceneNav() {
     setMounted(true);
   }, []);
 
-  if (!mounted || !hasMeasured) return null;
+  if (!mounted || !hasMeasured || pathname !== "/") return null;
 
   return (
     <>

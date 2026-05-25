@@ -195,6 +195,11 @@ export function useSceneTransition(
           pin: true,
           pinSpacing: true,
           scrub: true,
+          onToggle: (self) => {
+            if (self.isActive) {
+              window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-0" } }));
+            }
+          },
           onLeave: (self) => {
             const target = getSceneScrollStart("st-scene-2", 1) + 20;
             handleLeave(self, "st-scene-1", target, "fade");
@@ -210,6 +215,11 @@ export function useSceneTransition(
           pin: true,
           pinSpacing: true,
           scrub: true,
+          onToggle: (self) => {
+            if (self.isActive) {
+              window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-1" } }));
+            }
+          },
           onLeave: (self) => {
             const target = getSceneScrollStart("st-scene-3", 2) + 20;
             handleLeave(self, "st-scene-2", target, "wipe");
@@ -230,6 +240,11 @@ export function useSceneTransition(
           pin: true,
           pinSpacing: true,
           scrub: true,
+          onToggle: (self) => {
+            if (self.isActive) {
+              window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-2" } }));
+            }
+          },
           onLeave: (self) => {
             const target = getSceneScrollStart("st-scene-4", 3) + 20;
             handleLeave(self, "st-scene-3", target, "zoom");
@@ -250,6 +265,11 @@ export function useSceneTransition(
           pin: true,
           pinSpacing: true,
           scrub: true,
+          onToggle: (self) => {
+            if (self.isActive) {
+              window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-3" } }));
+            }
+          },
           onLeave: (self) => {
             const target = getSceneScrollStart("st-scene-5", 4) + 20;
             handleLeave(self, "st-scene-4", target, "explosion");
@@ -270,6 +290,11 @@ export function useSceneTransition(
           pin: true,
           pinSpacing: true,
           scrub: true,
+          onToggle: (self) => {
+            if (self.isActive) {
+              window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-4" } }));
+            }
+          },
           onLeave: (self) => {
             const target = getSceneScrollStart("st-scene-6", 5) + 20;
             handleLeave(self, "st-scene-5", target, "slow-fade");
@@ -290,6 +315,11 @@ export function useSceneTransition(
           pin: true,
           pinSpacing: true,
           scrub: true,
+          onToggle: (self) => {
+            if (self.isActive) {
+              window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-5" } }));
+            }
+          },
           onLeaveBack: () => {
             if (win.isTransitioning) return;
             const target = getSceneScrollEnd("st-scene-5", 4) - 20;

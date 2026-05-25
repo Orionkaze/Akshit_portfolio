@@ -3,9 +3,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useAnimeStagger } from "@/components/animations/useAnimeStagger";
 import MagneticButton from "@/components/ui/MagneticButton";
+import Link from "next/link";
 
 const contactLinks = [
-  { label: "Email", value: "akshitshukla.knp@gmail.com", href: "mailto:akshitshukla.knp@gmail.com" },
+  { label: "Email", value: "akshit2046@gmail.com", href: "mailto:akshit2046@gmail.com" },
   { label: "LinkedIn", value: "akshit-shukla-529707324", href: "https://linkedin.com/in/akshit-shukla-529707324" },
   { label: "Website", value: "www.arcavon.in", href: "https://www.arcavon.in" },
   { label: "GitHub", value: "github.com/akshitshukla", href: "https://github.com" },
@@ -44,10 +45,6 @@ export default function ContactScene() {
 
     return () => observer.disconnect();
   }, [hasAnimated, animateWords]);
-
-  const handleConnectClick = () => {
-    window.location.href = "mailto:akshitshukla.knp@gmail.com?subject=Let's Build!";
-  };
 
   return (
     <div
@@ -100,9 +97,11 @@ export default function ContactScene() {
         </div>
 
         {/* CTA Button */}
-        <MagneticButton onClick={handleConnectClick}>
-          Let&apos;s Connect
-        </MagneticButton>
+        <Link href="/contact" className="relative z-50 pointer-events-auto">
+          <MagneticButton onClick={() => {}}>
+            Let&apos;s Connect
+          </MagneticButton>
+        </Link>
       </div>
 
 

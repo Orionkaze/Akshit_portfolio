@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { useWindowSize } from "@/components/animations/useWindowSize";
-import { skillsList } from "@/components/three/SkillsSphere";
+import { skillsList } from "@/components/three/skillsData";
 
 // Dynamic import with SSR disabled to prevent 3D canvas compilation/hydration issues
 const SkillsSphere = dynamic(() => import("@/components/three/SkillsSphere"), {
