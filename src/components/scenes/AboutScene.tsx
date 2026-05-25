@@ -108,7 +108,7 @@ export default function AboutScene() {
           >
             <div className="flex flex-col">
               <span className="text-4xl md:text-5xl text-pure-white text-glow">
-                <AnimatedCounter value={500} suffix="+" />
+                <AnimatedCounter value={25} suffix="+" />
               </span>
               <span className="text-xs md:text-sm font-space uppercase tracking-widest text-muted-silver mt-1">
                 Students Mentored
@@ -117,7 +117,7 @@ export default function AboutScene() {
 
             <div className="flex flex-col">
               <span className="text-4xl md:text-5xl text-pure-white text-glow">
-                <AnimatedCounter value={99} suffix="%" />
+                <AnimatedCounter value={30} suffix="%" />
               </span>
               <span className="text-xs md:text-sm font-space uppercase tracking-widest text-muted-silver mt-1">
                 System Uptime
@@ -126,7 +126,7 @@ export default function AboutScene() {
 
             <div className="flex flex-col">
               <span className="text-4xl md:text-5xl text-pure-white text-glow">
-                <AnimatedCounter value={3} />
+                <AnimatedCounter value={13} />
               </span>
               <span className="text-xs md:text-sm font-space uppercase tracking-widest text-muted-silver mt-1">
                 Live Projects
@@ -135,7 +135,7 @@ export default function AboutScene() {
 
             <div className="flex flex-col">
               <span className="text-4xl md:text-5xl text-pure-white text-glow">
-                <AnimatedCounter value={15} suffix="+" />
+                <AnimatedCounter value={12} />
               </span>
               <span className="text-xs md:text-sm font-space uppercase tracking-widest text-muted-silver mt-1">
                 Components Built
