@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
-import { useAnimeStagger } from "@/components/animations/useAnimeStagger";
 import { useWindowSize } from "@/components/animations/useWindowSize";
 import MagneticButton from "@/components/ui/MagneticButton";
 
@@ -18,11 +17,27 @@ const roles = [
   "AI/ML Student",
 ];
 
+const nameLetters = "AKSHIT".split("");
+
+const letterVariants = {
+  hidden: { opacity: 0, y: 20, scale: 0.5 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      delay: 0.5 + i * 0.08,
+      duration: 0.6,
+      type: "spring",
+      stiffness: 150,
+      damping: 12,
+    },
+  }),
+};
+
 export default function HeroScene() {
   const { isMobile, hasMeasured } = useWindowSize();
   const [mounted, setMounted] = useState(false);
-  const nameRef = useRef<HTMLHeadingElement>(null);
-  const { splitIntoLetters, animateLetters } = useAnimeStagger();
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
 
   useEffect(() => {
@@ -30,24 +45,13 @@ export default function HeroScene() {
   }, []);
 
   useEffect(() => {
-    // Verify Syne font variable is loaded
-    if (typeof window !== "undefined") {
-      const computed = window.getComputedStyle(document.body).getPropertyValue("--font-syne");
-      console.log("Syne Font Variable (--font-syne):", computed);
-    }
-
-    // Stagger in name letters after a slight delay for cinematic feel
-    if (nameRef.current) {
-      animateLetters(nameRef.current, 500);
-    }
-
     // Cycle roles every 3 seconds
     const interval = setInterval(() => {
       setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [animateLetters]);
+  }, []);
 
   const handleEnterClick = () => {
     interface CustomWindow extends Window {
@@ -79,18 +83,28 @@ export default function HeroScene() {
       <div className="z-10 text-center max-w-4xl px-6 flex flex-col items-center justify-center">
         {/* Name Title */}
         <h1
-          ref={nameRef}
-          className="tracking-[0.12em] text-pure-white hero-text-glow uppercase select-none cursor-default mb-4"
+          className="tracking-[0.12em] text-pure-white hero-text-glow uppercase select-none cursor-default mb-4 flex"
           style={{
             fontSize: "clamp(3rem, 10vw, 11rem)",
             whiteSpace: "nowrap",
             fontFamily: "var(--font-syne), 'Syne', sans-serif",
             fontWeight: 800,
           }}
-          dangerouslySetInnerHTML={{
-            __html: splitIntoLetters("AKSHIT"),
-          }}
-        />
+        >
+          {nameLetters.map((letter, i) => (
+            <motion.span
+              key={i}
+              custom={i}
+              variants={letterVariants}
+              initial="hidden"
+              animate="visible"
+              className="inline-block"
+              style={{ transformOrigin: "center" }}
+            >
+              {letter}
+            </motion.span>
+          ))}
+        </h1>
 
         {/* Subtitle */}
         <p className="font-inter font-light italic text-muted-silver tracking-[0.05em] text-sm md:text-base lg:text-xl mb-6 h-6 flex items-center justify-center">
@@ -131,3 +145,4 @@ export default function HeroScene() {
     </div>
   );
 }
+
