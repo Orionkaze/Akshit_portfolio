@@ -25,6 +25,7 @@ export function useSceneTransition(
   useEffect(() => {
     let ctx: gsap.Context | undefined;
     let transitionTimeout: NodeJS.Timeout | undefined;
+    let resizeCleanup: (() => void) | undefined;
     const thresholdListeners: { [key: string]: () => void } = {};
 
     const init = setTimeout(() => {
@@ -336,12 +337,37 @@ export function useSceneTransition(
 
       }, container);
 
+      // Add will-change hints to pinned scenes for GPU compositing
+      scenes.forEach((scene) => {
+        scene.style.willChange = "transform";
+      });
+
+      // Debounced ScrollTrigger.refresh() on resize to handle mobile address bar changes
+      let resizeTimer: NodeJS.Timeout;
+      const handleResize = () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          ScrollTrigger.refresh();
+        }, 250);
+      };
+      window.addEventListener("resize", handleResize);
+
+      // Store cleanup ref for resize
+      resizeCleanup = () => {
+        clearTimeout(resizeTimer);
+        window.removeEventListener("resize", handleResize);
+      };
+
     }, 800);
 
     return () => {
       clearTimeout(init);
       if (ctx) ctx.revert();
       if (transitionTimeout) clearTimeout(transitionTimeout);
+      // Clean up resize listener
+      if (resizeCleanup) {
+        resizeCleanup();
+      }
       Object.keys(thresholdListeners).forEach((id) => {
         window.removeEventListener("scroll", thresholdListeners[id]);
       });

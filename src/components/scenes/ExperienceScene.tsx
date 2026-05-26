@@ -88,7 +88,7 @@ export default function ExperienceScene() {
             className="flex items-center justify-center lg:justify-end relative w-full h-[400px] md:h-[450px]"
           >
             {/* A relative wrapper to contain the absolutely positioned CardSwap container */}
-            <div className="relative w-[320px] h-[240px] md:w-[420px] md:h-[320px]">
+            <div className="relative w-full max-w-[320px] h-[280px] md:w-[420px] md:h-[320px] mx-auto">
               <CardSwap
                 cardDistance={50}
                 verticalDistance={60}

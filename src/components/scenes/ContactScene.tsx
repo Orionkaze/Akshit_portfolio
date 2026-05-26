@@ -54,7 +54,7 @@ export default function ContactScene() {
     <div
       ref={containerRef}
       id="scene-5"
-      className="w-screen h-screen relative flex flex-col justify-between items-center overflow-hidden bg-black py-20 px-6 select-none"
+      className="w-screen min-h-screen relative flex flex-col justify-between items-center overflow-hidden bg-black py-20 px-6 select-none"
     >
       {/* Background radial gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(10,10,15,0.8)_0%,#000000_100%)] pointer-events-none -z-10" />

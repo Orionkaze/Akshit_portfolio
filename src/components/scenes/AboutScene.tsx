@@ -109,7 +109,7 @@ export default function AboutScene() {
             className="grid grid-cols-2 gap-8 border-t border-electric-cyan/20 pt-8"
           >
             <div className="flex flex-col">
-              <span className="text-4xl md:text-5xl text-pure-white text-glow">
+              <span className="text-3xl sm:text-4xl md:text-5xl text-pure-white text-glow">
                 <AnimatedCounter value={25} suffix="+" trigger={hasTriggeredText} />
               </span>
               <span className="text-xs md:text-sm font-space uppercase tracking-widest text-muted-silver mt-1">
@@ -118,7 +118,7 @@ export default function AboutScene() {
             </div>
 
             <div className="flex flex-col">
-              <span className="text-4xl md:text-5xl text-pure-white text-glow">
+              <span className="text-3xl sm:text-4xl md:text-5xl text-pure-white text-glow">
                 <AnimatedCounter value={30} suffix="%" trigger={hasTriggeredText} />
               </span>
               <span className="text-xs md:text-sm font-space uppercase tracking-widest text-muted-silver mt-1">
@@ -127,7 +127,7 @@ export default function AboutScene() {
             </div>
 
             <div className="flex flex-col">
-              <span className="text-4xl md:text-5xl text-pure-white text-glow">
+              <span className="text-3xl sm:text-4xl md:text-5xl text-pure-white text-glow">
                 <AnimatedCounter value={13} trigger={hasTriggeredText} />
               </span>
               <span className="text-xs md:text-sm font-space uppercase tracking-widest text-muted-silver mt-1">
@@ -136,7 +136,7 @@ export default function AboutScene() {
             </div>
 
             <div className="flex flex-col">
-              <span className="text-4xl md:text-5xl text-pure-white text-glow">
+              <span className="text-3xl sm:text-4xl md:text-5xl text-pure-white text-glow">
                 <AnimatedCounter value={12} trigger={hasTriggeredText} />
               </span>
               <span className="text-xs md:text-sm font-space uppercase tracking-widest text-muted-silver mt-1">

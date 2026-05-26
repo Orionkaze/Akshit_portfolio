@@ -33,12 +33,25 @@
 
 @media (max-width: 768px) {
   .card-swap-container {
-    transform: scale(0.75) translate(25%, 25%);
+    transform: scale(0.75);
+    transform-origin: center center;
+    left: 50%;
+    right: auto;
+    bottom: 50%;
+    translate: -50% 50%;
   }
 }
 
 @media (max-width: 480px) {
   .card-swap-container {
-    transform: scale(0.55) translate(25%, 25%);
+    transform: scale(0.6);
+    transform-origin: center center;
+    left: 50%;
+    right: auto;
+    bottom: 50%;
+    translate: -50% 50%;
+  }
+  .card {
+    padding: 20px;
   }
 }

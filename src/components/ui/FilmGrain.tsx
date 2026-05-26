@@ -1,52 +1,23 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { useWindowSize } from "@/components/animations/useWindowSize";
 
 export default function FilmGrain() {
   const { isMobile } = useWindowSize();
-  const filterRef = useRef<SVGFETurbulenceElement>(null);
 
-  useEffect(() => {
-    let animationId: number;
-    const baseVal = 0.8;
+  // On mobile, skip entirely for performance
+  if (isMobile) return null;
 
-
-    const animateGrain = () => {
-      if (filterRef.current) {
-        // Slightly fluctuate the baseFrequency to animate the grain texture
-        // using requestAnimationFrame for a living texture
-        const newValX = baseVal + Math.random() * 0.02;
-        const newValY = baseVal + Math.random() * 0.02;
-        filterRef.current.setAttribute("baseFrequency", `${newValX} ${newValY}`);
-      }
-      animationId = requestAnimationFrame(animateGrain);
-    };
-
-    animationId = requestAnimationFrame(animateGrain);
-
-    return () => {
-      cancelAnimationFrame(animationId);
-    };
-  }, []);
-
+  // Use a static CSS-based noise instead of per-frame SVG feTurbulence updates.
+  // This eliminates the requestAnimationFrame loop that was causing jank during scrolling.
   return (
-    <div className={`fixed inset-0 pointer-events-none z-[9999] w-full h-full ${
-      isMobile ? "opacity-[0.02]" : "opacity-[0.035]"
-    }`}>
-      <svg className="w-full h-full">
-        <filter id="cinematic-noise">
-          <feTurbulence
-            ref={filterRef}
-            type="fractalNoise"
-            baseFrequency="0.8"
-            numOctaves="3"
-            stitchTiles="stitch"
-          />
-          <feColorMatrix type="matrix" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.8 0" />
-        </filter>
-        <rect width="100%" height="100%" filter="url(#cinematic-noise)" />
-      </svg>
-    </div>
+    <div
+      className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.03]"
+      style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+        backgroundRepeat: "repeat",
+      }}
+    />
   );
 }

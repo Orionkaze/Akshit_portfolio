@@ -98,10 +98,10 @@ function ProjectCard({ project }: { project: ProjectItem }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
       style={cardStyle}
-      className={`relative rounded-2xl flex flex-col justify-between p-8 bg-midnight-navy/50 border transition-all duration-300 shadow-2xl overflow-hidden group select-none ${
+      className={`relative rounded-2xl flex flex-col justify-between p-6 md:p-8 bg-midnight-navy/50 border transition-all duration-300 shadow-2xl overflow-hidden group select-none ${
         project.isHero
-          ? "w-full max-w-[340px] h-[430px] sm:max-w-[400px] md:w-[456px] md:h-[576px] border-electric-cyan border-2 z-20 md:scale-105"
-          : "w-full max-w-[300px] h-[380px] sm:max-w-[350px] md:w-[380px] md:h-[480px] border-electric-cyan/15 hover:border-electric-cyan/60 z-10"
+          ? "w-full max-w-[340px] h-[430px] sm:max-w-[400px] md:max-w-[456px] md:h-[576px] border-electric-cyan border-2 z-20"
+          : "w-full max-w-[300px] h-[380px] sm:max-w-[350px] md:max-w-[380px] md:h-[480px] border-electric-cyan/15 hover:border-electric-cyan/60 z-10"
       }`}
       animate={{
         boxShadow: isHovered

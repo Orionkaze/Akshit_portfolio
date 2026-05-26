@@ -106,3 +106,26 @@ html, body {
   background: radial-gradient(ellipse at left, rgba(0, 212, 255, 0.06) 0%, transparent 70%);
 }
 
+/* GPU-accelerate pinned scenes for smooth scrolling */
+[id^="scene-"] {
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Smooth scrolling container hint */
+html {
+  scroll-behavior: auto; /* GSAP handles scrolling */
+  -webkit-overflow-scrolling: touch;
+}
+
