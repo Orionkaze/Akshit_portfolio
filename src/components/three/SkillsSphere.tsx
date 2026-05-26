@@ -124,20 +124,41 @@ function CentralSphere() {
 export default function SkillsSphere() {
   const { isMobile, hasMeasured } = useWindowSize();
   const [mounted, setMounted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isMobile]);
 
   if (!mounted || !hasMeasured || isMobile) {
     return null;
   }
 
   return (
-    <div className="w-full h-[550px] relative bg-transparent flex items-center justify-center">
+    <div ref={containerRef} className="w-full h-[550px] relative bg-transparent flex items-center justify-center">
       <Canvas
         camera={{ position: [0, 0, 5.5], fov: 60 }}
         gl={{ antialias: true, alpha: true }}
+        dpr={[1, 1.5]}
+        frameloop={isInView ? "always" : "demand"}
         className="w-full h-full"
       >
 

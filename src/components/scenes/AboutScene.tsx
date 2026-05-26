@@ -161,7 +161,7 @@ export default function AboutScene() {
                     transformStyle: "preserve-3d" as const,
                   }
             }
-            className="w-full max-w-[380px] h-[480px] rounded-2xl border border-electric-cyan/20 bg-midnight-navy/60 backdrop-blur-md flex flex-col justify-between p-8 relative overflow-hidden group shadow-2xl transition-all duration-300 hover:border-electric-cyan"
+            className="w-full max-w-[380px] min-h-[480px] md:h-[480px] rounded-2xl border border-electric-cyan/20 bg-midnight-navy/60 backdrop-blur-md flex flex-col justify-between p-8 relative overflow-hidden group shadow-2xl transition-all duration-300 hover:border-electric-cyan"
           >
             {/* Background shimmer */}
             <div className="absolute inset-0 bg-gradient-to-tr from-electric-cyan/0 via-electric-cyan/5 to-electric-cyan/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />

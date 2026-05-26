@@ -130,6 +130,14 @@ export function useSceneTransition(
 
       // Expose global navigator function for dots and buttons
       win.navigateToScene = (index: number) => {
+        if (window.innerWidth <= 1024) {
+          const target = document.querySelector(`#scene-${index}`);
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+          return;
+        }
+
         if (win.isTransitioning) return;
         
         const targetScroll = getSceneScrollStart(`st-scene-${index + 1}`, index) + (index === 0 ? 0 : 20);
@@ -191,156 +199,182 @@ export function useSceneTransition(
         window.addEventListener("scroll", onScrollThreshold);
       };
 
+      const mm = gsapCore.matchMedia();
+
       // Pinning and Transition Timelines setup inside GSAP Context
       ctx = gsapCore.context(() => {
         
-        // 1. Scene 1 (Hero)
-        ScrollTrigger.create({
-          id: "st-scene-1",
-          trigger: "#scene-0",
-          start: "top top",
-          end: "+=100%",
-          pin: true,
-          pinSpacing: true,
-          scrub: true,
-          onToggle: (self) => {
-            if (self.isActive) {
-              window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-0" } }));
-            }
-          },
-          onLeave: (self) => {
-            const target = getSceneScrollStart("st-scene-2", 1) + 20;
-            handleLeave(self, "st-scene-1", target, "fade");
-          },
+        // Desktop Layout: pinning, scrub, custom transitions
+        mm.add("(min-width: 1025px)", () => {
+          // 1. Scene 1 (Hero)
+          ScrollTrigger.create({
+            id: "st-scene-1",
+            trigger: "#scene-0",
+            start: "top top",
+            end: "+=100%",
+            pin: true,
+            pinSpacing: true,
+            scrub: true,
+            onToggle: (self) => {
+              if (self.isActive) {
+                window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-0" } }));
+              }
+            },
+            onLeave: (self) => {
+              const target = getSceneScrollStart("st-scene-2", 1) + 20;
+              handleLeave(self, "st-scene-1", target, "fade");
+            },
+          });
+
+          // 2. Scene 2 (About)
+          ScrollTrigger.create({
+            id: "st-scene-2",
+            trigger: "#scene-1",
+            start: "top top",
+            end: "+=100%",
+            pin: true,
+            pinSpacing: true,
+            scrub: true,
+            onToggle: (self) => {
+              if (self.isActive) {
+                window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-1" } }));
+              }
+            },
+            onLeave: (self) => {
+              const target = getSceneScrollStart("st-scene-3", 2) + 20;
+              handleLeave(self, "st-scene-2", target, "wipe");
+            },
+            onLeaveBack: () => {
+              if (win.isTransitioning) return;
+              const target = 0;
+              performTransition("fade", target, true);
+            },
+          });
+
+          // 3. Scene 3 (Experience)
+          ScrollTrigger.create({
+            id: "st-scene-3",
+            trigger: "#scene-2",
+            start: "top top",
+            end: "+=100%",
+            pin: true,
+            pinSpacing: true,
+            scrub: true,
+            onToggle: (self) => {
+              if (self.isActive) {
+                window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-2" } }));
+              }
+            },
+            onLeave: (self) => {
+              const target = getSceneScrollStart("st-scene-4", 3) + 20;
+              handleLeave(self, "st-scene-3", target, "zoom");
+            },
+            onLeaveBack: () => {
+              if (win.isTransitioning) return;
+              const target = getSceneScrollEnd("st-scene-2", 1) - 20;
+              performTransition("wipe", target, true);
+            },
+          });
+
+          // 4. Scene 4 (Projects)
+          ScrollTrigger.create({
+            id: "st-scene-4",
+            trigger: "#scene-3",
+            start: "top top",
+            end: "+=100%",
+            pin: true,
+            pinSpacing: true,
+            scrub: true,
+            onToggle: (self) => {
+              if (self.isActive) {
+                window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-3" } }));
+              }
+            },
+            onLeave: (self) => {
+              const target = getSceneScrollStart("st-scene-5", 4) + 20;
+              handleLeave(self, "st-scene-4", target, "explosion");
+            },
+            onLeaveBack: () => {
+              if (win.isTransitioning) return;
+              const target = getSceneScrollEnd("st-scene-3", 2) - 20;
+              performTransition("zoom", target, true);
+            },
+          });
+
+          // 5. Scene 5 (Skills)
+          ScrollTrigger.create({
+            id: "st-scene-5",
+            trigger: "#scene-4",
+            start: "top top",
+            end: "+=100%",
+            pin: true,
+            pinSpacing: true,
+            scrub: true,
+            onToggle: (self) => {
+              if (self.isActive) {
+                window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-4" } }));
+              }
+            },
+            onLeave: (self) => {
+              const target = getSceneScrollStart("st-scene-6", 5) + 20;
+              handleLeave(self, "st-scene-5", target, "slow-fade");
+            },
+            onLeaveBack: () => {
+              if (win.isTransitioning) return;
+              const target = getSceneScrollEnd("st-scene-4", 3) - 20;
+              performTransition("explosion", target, true);
+            },
+          });
+
+          // 6. Scene 6 (Contact)
+          ScrollTrigger.create({
+            id: "st-scene-6",
+            trigger: "#scene-5",
+            start: "top top",
+            end: "+=100%",
+            pin: true,
+            pinSpacing: true,
+            scrub: true,
+            onToggle: (self) => {
+              if (self.isActive) {
+                window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-5" } }));
+              }
+            },
+            onLeaveBack: () => {
+              if (win.isTransitioning) return;
+              const target = getSceneScrollEnd("st-scene-5", 4) - 20;
+              performTransition("slow-fade", target, true);
+            },
+          });
         });
 
-        // 2. Scene 2 (About)
-        ScrollTrigger.create({
-          id: "st-scene-2",
-          trigger: "#scene-1",
-          start: "top top",
-          end: "+=100%",
-          pin: true,
-          pinSpacing: true,
-          scrub: true,
-          onToggle: (self) => {
-            if (self.isActive) {
-              window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-1" } }));
-            }
-          },
-          onLeave: (self) => {
-            const target = getSceneScrollStart("st-scene-3", 2) + 20;
-            handleLeave(self, "st-scene-2", target, "wipe");
-          },
-          onLeaveBack: () => {
-            if (win.isTransitioning) return;
-            const target = 0;
-            performTransition("fade", target, true);
-          },
-        });
-
-        // 3. Scene 3 (Experience)
-        ScrollTrigger.create({
-          id: "st-scene-3",
-          trigger: "#scene-2",
-          start: "top top",
-          end: "+=100%",
-          pin: true,
-          pinSpacing: true,
-          scrub: true,
-          onToggle: (self) => {
-            if (self.isActive) {
-              window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-2" } }));
-            }
-          },
-          onLeave: (self) => {
-            const target = getSceneScrollStart("st-scene-4", 3) + 20;
-            handleLeave(self, "st-scene-3", target, "zoom");
-          },
-          onLeaveBack: () => {
-            if (win.isTransitioning) return;
-            const target = getSceneScrollEnd("st-scene-2", 1) - 20;
-            performTransition("wipe", target, true);
-          },
-        });
-
-        // 4. Scene 4 (Projects)
-        ScrollTrigger.create({
-          id: "st-scene-4",
-          trigger: "#scene-3",
-          start: "top top",
-          end: "+=100%",
-          pin: true,
-          pinSpacing: true,
-          scrub: true,
-          onToggle: (self) => {
-            if (self.isActive) {
-              window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-3" } }));
-            }
-          },
-          onLeave: (self) => {
-            const target = getSceneScrollStart("st-scene-5", 4) + 20;
-            handleLeave(self, "st-scene-4", target, "explosion");
-          },
-          onLeaveBack: () => {
-            if (win.isTransitioning) return;
-            const target = getSceneScrollEnd("st-scene-3", 2) - 20;
-            performTransition("zoom", target, true);
-          },
-        });
-
-        // 5. Scene 5 (Skills)
-        ScrollTrigger.create({
-          id: "st-scene-5",
-          trigger: "#scene-4",
-          start: "top top",
-          end: "+=100%",
-          pin: true,
-          pinSpacing: true,
-          scrub: true,
-          onToggle: (self) => {
-            if (self.isActive) {
-              window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-4" } }));
-            }
-          },
-          onLeave: (self) => {
-            const target = getSceneScrollStart("st-scene-6", 5) + 20;
-            handleLeave(self, "st-scene-5", target, "slow-fade");
-          },
-          onLeaveBack: () => {
-            if (win.isTransitioning) return;
-            const target = getSceneScrollEnd("st-scene-4", 3) - 20;
-            performTransition("explosion", target, true);
-          },
-        });
-
-        // 6. Scene 6 (Contact)
-        ScrollTrigger.create({
-          id: "st-scene-6",
-          trigger: "#scene-5",
-          start: "top top",
-          end: "+=100%",
-          pin: true,
-          pinSpacing: true,
-          scrub: true,
-          onToggle: (self) => {
-            if (self.isActive) {
-              window.dispatchEvent(new CustomEvent("sceneChange", { detail: { activeScene: "scene-5" } }));
-            }
-          },
-          onLeaveBack: () => {
-            if (win.isTransitioning) return;
-            const target = getSceneScrollEnd("st-scene-5", 4) - 20;
-            performTransition("slow-fade", target, true);
-          },
+        // Mobile/Tablet Layout: Normal scrolling, lightweight scroll spy
+        mm.add("(max-width: 1024px)", () => {
+          [0, 1, 2, 3, 4, 5].forEach((i) => {
+            ScrollTrigger.create({
+              id: `st-scene-spy-${i}`,
+              trigger: `#scene-${i}`,
+              start: "top 50%",
+              end: "bottom 50%",
+              onToggle: (self) => {
+                if (self.isActive) {
+                  window.dispatchEvent(
+                    new CustomEvent("sceneChange", { detail: { activeScene: `scene-${i}` } })
+                  );
+                }
+              },
+            });
+          });
         });
 
       }, container);
 
-      // Add will-change hints to pinned scenes for GPU compositing
-      scenes.forEach((scene) => {
-        scene.style.willChange = "transform";
-      });
+      // Add will-change hints to pinned scenes only on desktop for GPU compositing
+      if (window.innerWidth > 1024) {
+        scenes.forEach((scene) => {
+          scene.style.willChange = "transform";
+        });
+      }
 
       // Debounced ScrollTrigger.refresh() on resize to handle mobile address bar changes
       let resizeTimer: NodeJS.Timeout;

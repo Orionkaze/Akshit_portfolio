@@ -81,7 +81,7 @@ export default function HeroScene() {
         <h1
           className="tracking-[0.12em] text-pure-white hero-text-glow uppercase select-none cursor-default mb-4 flex"
           style={{
-            fontSize: "clamp(3rem, 10vw, 11rem)",
+            fontSize: "clamp(2.2rem, 10vw, 11rem)",
             whiteSpace: "nowrap",
             fontFamily: "var(--font-syne), 'Syne', sans-serif",
             fontWeight: 800,

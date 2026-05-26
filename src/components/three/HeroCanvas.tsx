@@ -86,10 +86,29 @@ function Particles({ count = 250 }: { count?: number }) {
 export default function HeroCanvas() {
   const { isMobile, isTablet, hasMeasured } = useWindowSize();
   const [mounted, setMounted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(true);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (isMobile) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.05 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isMobile]);
 
   if (!mounted || !hasMeasured || isMobile) {
     return <div className="w-full h-full absolute inset-0 -z-10 bg-radial-gradient" />;
@@ -98,10 +117,12 @@ export default function HeroCanvas() {
   const particleCount = isTablet ? 100 : 250;
 
   return (
-    <div className="w-full h-full absolute inset-0 -z-10 bg-radial-gradient">
+    <div ref={containerRef} className="w-full h-full absolute inset-0 -z-10 bg-radial-gradient">
       <Canvas
         camera={{ position: [0, 0, 5], fov: 60 }}
         gl={{ antialias: true, alpha: true }}
+        dpr={[1, 1.5]}
+        frameloop={isInView ? "always" : "demand"}
         className="w-full h-full"
       >
         <ambientLight color="#0A0A2E" intensity={0.6} />

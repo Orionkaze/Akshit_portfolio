@@ -108,7 +108,6 @@ html, body {
 
 /* GPU-accelerate pinned scenes for smooth scrolling */
 [id^="scene-"] {
-  will-change: transform;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }

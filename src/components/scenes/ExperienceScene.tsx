@@ -4,8 +4,10 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CardSwap, { Card } from "@/components/ui/CardSwap";
+import { useWindowSize } from "@/components/animations/useWindowSize";
 
 export default function ExperienceScene() {
+  const { isMobile } = useWindowSize();
   const containerRef = useRef<HTMLDivElement>(null);
   const leftColRef = useRef<HTMLDivElement>(null);
   const rightColRef = useRef<HTMLDivElement>(null);
@@ -85,84 +87,153 @@ export default function ExperienceScene() {
           {/* Right Column: CardSwap Stack */}
           <div
             ref={rightColRef}
-            className="flex items-center justify-center lg:justify-end relative w-full h-[400px] md:h-[450px]"
+            className={`flex items-center justify-center lg:justify-end relative w-full ${isMobile ? "h-auto" : "h-[400px] md:h-[450px]"}`}
           >
-            {/* A relative wrapper to contain the absolutely positioned CardSwap container */}
-            <div className="relative w-full max-w-[320px] h-[280px] md:w-[420px] md:h-[320px] mx-auto">
-              <CardSwap
-                cardDistance={50}
-                verticalDistance={60}
-                delay={2500}
-                pauseOnHover={true}
-                easing="elastic"
-                width={420}
-                height={320}
-              >
-                <Card>
+            {isMobile ? (
+              /* Clean vertical list on mobile for perfect readability */
+              <div className="flex flex-col gap-6 w-full max-w-[420px] mx-auto mt-6">
+                <div className="w-full bg-[#0A0A0F]/70 border border-electric-cyan/30 rounded-2xl p-6 flex flex-col shadow-2xl relative overflow-hidden">
                   <p className="font-mono text-xs text-electric-cyan tracking-[0.2em] uppercase mb-2">
                     2025 – PRESENT
                   </p>
-                  <h3 className="font-syne font-extrabold text-2xl text-pure-white uppercase mb-1">
+                  <h3 className="font-syne font-extrabold text-xl text-pure-white uppercase mb-1">
                     CTO & Full-Stack Dev
                   </h3>
-                  <p className="font-mono text-sm text-electric-cyan mb-4">@Arcavon</p>
-                  <ul className="flex flex-col gap-2">
-                    <li className="font-inter font-light text-sm text-muted-silver flex items-start gap-2">
+                  <p className="font-mono text-xs text-electric-cyan mb-3">@Arcavon</p>
+                  <ul className="flex flex-col gap-2.5">
+                    <li className="font-inter font-light text-xs text-muted-silver flex items-start gap-2">
                       <span className="text-electric-cyan font-bold mt-1 text-xs">▸</span>
                       <span>Led end-to-end architecture of a game-tech platform</span>
                     </li>
-                    <li className="font-inter font-light text-sm text-muted-silver flex items-start gap-2">
+                    <li className="font-inter font-light text-xs text-muted-silver flex items-start gap-2">
                       <span className="text-electric-cyan font-bold mt-1 text-xs">▸</span>
                       <span>99% uptime, thousands of monthly visits</span>
                     </li>
-                    <li className="font-inter font-light text-sm text-muted-silver flex items-start gap-2">
+                    <li className="font-inter font-light text-xs text-muted-silver flex items-start gap-2">
                       <span className="text-electric-cyan font-bold mt-1 text-xs">▸</span>
                       <span>Reduced feature dev time by ~30% with modular architecture</span>
                     </li>
                   </ul>
-                </Card>
+                </div>
 
-                <Card>
+                <div className="w-full bg-[#0A0A0F]/70 border border-electric-cyan/15 rounded-2xl p-6 flex flex-col shadow-2xl relative overflow-hidden">
                   <p className="font-mono text-xs text-electric-cyan tracking-[0.2em] uppercase mb-2">
                     2025
                   </p>
-                  <h3 className="font-syne font-extrabold text-2xl text-pure-white uppercase mb-1">
+                  <h3 className="font-syne font-extrabold text-xl text-pure-white uppercase mb-1">
                     Google Student Ambassador
                   </h3>
-                  <p className="font-mono text-sm text-electric-cyan mb-4">@SDGI</p>
-                  <ul className="flex flex-col gap-2">
-                    <li className="font-inter font-light text-sm text-muted-silver flex items-start gap-2">
+                  <p className="font-mono text-xs text-electric-cyan mb-3">@SDGI</p>
+                  <ul className="flex flex-col gap-2.5">
+                    <li className="font-inter font-light text-xs text-muted-silver flex items-start gap-2">
                       <span className="text-electric-cyan font-bold mt-1 text-xs">▸</span>
                       <span>Led university technical chapters, conducting community bootcamps on cloud services, Git, and REST APIs</span>
                     </li>
-                    <li className="font-inter font-light text-sm text-muted-silver flex items-start gap-2">
+                    <li className="font-inter font-light text-xs text-muted-silver flex items-start gap-2">
                       <span className="text-electric-cyan font-bold mt-1 text-xs">▸</span>
                       <span>Orchestrated cross-university dev sessions, improving average student project completion rates</span>
                     </li>
                   </ul>
-                </Card>
+                </div>
 
-                <Card>
+                <div className="w-full bg-[#0A0A0F]/70 border border-electric-cyan/15 rounded-2xl p-6 flex flex-col shadow-2xl relative overflow-hidden">
                   <p className="font-mono text-xs text-electric-cyan tracking-[0.2em] uppercase mb-2">
                     2026 – PRESENT
                   </p>
-                  <h3 className="font-syne font-extrabold text-2xl text-pure-white uppercase mb-1">
+                  <h3 className="font-syne font-extrabold text-xl text-pure-white uppercase mb-1">
                     GFG Campus Mantri
                   </h3>
-                  <p className="font-mono text-sm text-electric-cyan mb-4">@SDGI Global University</p>
-                  <ul className="flex flex-col gap-2">
-                    <li className="font-inter font-light text-sm text-muted-silver flex items-start gap-2">
+                  <p className="font-mono text-xs text-electric-cyan mb-3">@SDGI Global University</p>
+                  <ul className="flex flex-col gap-2.5">
+                    <li className="font-inter font-light text-xs text-muted-silver flex items-start gap-2">
                       <span className="text-electric-cyan font-bold mt-1 text-xs">▸</span>
                       <span>Leading GFG student community on campus</span>
                     </li>
-                    <li className="font-inter font-light text-sm text-muted-silver flex items-start gap-2">
+                    <li className="font-inter font-light text-xs text-muted-silver flex items-start gap-2">
                       <span className="text-electric-cyan font-bold mt-1 text-xs">▸</span>
                       <span>Organizing hackathons and coding contests for 500+ students</span>
                     </li>
                   </ul>
-                </Card>
-              </CardSwap>
-            </div>
+                </div>
+              </div>
+            ) : (
+              /* A relative wrapper to contain the absolutely positioned CardSwap container */
+              <div className="relative w-full max-w-[320px] h-[280px] md:w-[420px] md:h-[320px] mx-auto">
+                <CardSwap
+                  cardDistance={50}
+                  verticalDistance={60}
+                  delay={2500}
+                  pauseOnHover={true}
+                  easing="elastic"
+                  width={420}
+                  height={320}
+                >
+                  <Card>
+                    <p className="font-mono text-xs text-electric-cyan tracking-[0.2em] uppercase mb-2">
+                      2025 – PRESENT
+                    </p>
+                    <h3 className="font-syne font-extrabold text-2xl text-pure-white uppercase mb-1">
+                      CTO & Full-Stack Dev
+                    </h3>
+                    <p className="font-mono text-sm text-electric-cyan mb-4">@Arcavon</p>
+                    <ul className="flex flex-col gap-2">
+                      <li className="font-inter font-light text-sm text-muted-silver flex items-start gap-2">
+                        <span className="text-electric-cyan font-bold mt-1 text-xs">▸</span>
+                        <span>Led end-to-end architecture of a game-tech platform</span>
+                      </li>
+                      <li className="font-inter font-light text-sm text-muted-silver flex items-start gap-2">
+                        <span className="text-electric-cyan font-bold mt-1 text-xs">▸</span>
+                        <span>99% uptime, thousands of monthly visits</span>
+                      </li>
+                      <li className="font-inter font-light text-sm text-muted-silver flex items-start gap-2">
+                        <span className="text-electric-cyan font-bold mt-1 text-xs">▸</span>
+                        <span>Reduced feature dev time by ~30% with modular architecture</span>
+                      </li>
+                    </ul>
+                  </Card>
+
+                  <Card>
+                    <p className="font-mono text-xs text-electric-cyan tracking-[0.2em] uppercase mb-2">
+                      2025
+                    </p>
+                    <h3 className="font-syne font-extrabold text-2xl text-pure-white uppercase mb-1">
+                      Google Student Ambassador
+                    </h3>
+                    <p className="font-mono text-sm text-electric-cyan mb-4">@SDGI</p>
+                    <ul className="flex flex-col gap-2">
+                      <li className="font-inter font-light text-sm text-muted-silver flex items-start gap-2">
+                        <span className="text-electric-cyan font-bold mt-1 text-xs">▸</span>
+                        <span>Led university technical chapters, conducting community bootcamps on cloud services, Git, and REST APIs</span>
+                      </li>
+                      <li className="font-inter font-light text-sm text-muted-silver flex items-start gap-2">
+                        <span className="text-electric-cyan font-bold mt-1 text-xs">▸</span>
+                        <span>Orchestrated cross-university dev sessions, improving average student project completion rates</span>
+                      </li>
+                    </ul>
+                  </Card>
+
+                  <Card>
+                    <p className="font-mono text-xs text-electric-cyan tracking-[0.2em] uppercase mb-2">
+                      2026 – PRESENT
+                    </p>
+                    <h3 className="font-syne font-extrabold text-2xl text-pure-white uppercase mb-1">
+                      GFG Campus Mantri
+                    </h3>
+                    <p className="font-mono text-sm text-electric-cyan mb-4">@SDGI Global University</p>
+                    <ul className="flex flex-col gap-2">
+                      <li className="font-inter font-light text-sm text-muted-silver flex items-start gap-2">
+                        <span className="text-electric-cyan font-bold mt-1 text-xs">▸</span>
+                        <span>Leading GFG student community on campus</span>
+                      </li>
+                      <li className="font-inter font-light text-sm text-muted-silver flex items-start gap-2">
+                        <span className="text-electric-cyan font-bold mt-1 text-xs">▸</span>
+                        <span>Organizing hackathons and coding contests for 500+ students</span>
+                      </li>
+                    </ul>
+                  </Card>
+                </CardSwap>
+              </div>
+            )}
           </div>
 
         </div>
